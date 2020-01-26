@@ -11,14 +11,14 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 ---
 {
 	"timeZone" : "Asia/Kolkata",
-	"date" : "2020-01-29 10:30",
-	"topic" : "Assessment3",
-	"participants" : "monilp1996@gmail.com,monil.porwal@apisero.com",
+	"date" : attributes.queryParams.date,
+	"topic" : attributes.queryParams.topic,
+	"participants" : attributes.queryParams.participant,
 	"sendMail" : "yes",
 	"audioType" : "ZohoMeeting",
 	"apikey" : "${meeting.apikey}",
 	"authtoken" : "${meeting.token}",
-	"agenda" : "Discussion assessment"
+	"agenda" : attributes.queryParams.agenda
 }]]]></http:query-params>
 		</http:request>
 		<ee:transform doc:name="Transform Message" doc:id="06b1de9b-1945-4a17-adcf-9d140e33fcd0" >
@@ -26,7 +26,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/java
 ---
-payload]]></ee:set-payload>
+"Email Sent"]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 	</sub-flow>
