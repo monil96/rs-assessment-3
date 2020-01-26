@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="expFlow" doc:id="564dc43f-4048-494c-b6be-e893b6c7b831" >
+		<http:listener doc:name="Listener" doc:id="76eb877c-f0dd-4069-a45f-2e1d417d29d9" config-ref="HTTP_Listener_config" path="/zohomeeting"/>
+		<flow-ref doc:name="prcSub_Flow" doc:id="5a9355a8-9b4c-452f-85c2-1cbf8e23eda1" name="prcSub_Flow"/>
+	</flow>
+</mule>

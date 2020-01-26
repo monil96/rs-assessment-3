@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="prcSub_Flow" doc:id="9307d166-bd6b-4946-b205-0e2df2410954" >
+		<http:request method="POST" doc:name="Request" doc:id="f2e0cdd1-3b21-4752-8f30-81aaeb002018" path="/api/private/json/meetings/createMeeting" config-ref="HTTP_Request_configuration">
+			<http:query-params ><![CDATA[#[output application/java
+---
+{
+	"timeZone" : "Asia/Kolkata",
+	"date" : "2020-01-29 10:30",
+	"topic" : "Assessment3",
+	"participants" : "monilp1996@gmail.com,monil.porwal@apisero.com",
+	"sendMail" : "yes",
+	"audioType" : "ZohoMeeting",
+	"apikey" : "${meeting.apikey}",
+	"authtoken" : "${meeting.token}",
+	"agenda" : "Discussion assessment"
+}]]]></http:query-params>
+		</http:request>
+		<ee:transform doc:name="Transform Message" doc:id="06b1de9b-1945-4a17-adcf-9d140e33fcd0" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</sub-flow>
+</mule>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<error-handler name="error-handlerError_Handler" doc:id="6756cb4f-3072-44de-8acc-1c662398a152" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="e5bc9908-96fe-4010-b4f7-dd558dbf9814" type="EXPRESSION">
+			<ee:transform doc:name="Transform Message" doc:id="96fcab72-134d-486b-8ccf-33f3fbe96f80" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output text/plain
+---
+"Expression Error"]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="4d6a6827-6013-43ed-94d6-1ab327892730" type="STREAM_MAXIMUM_SIZE_EXCEEDED">
+			<ee:transform doc:name="Transform Message" doc:id="9ebd91c4-f70d-4996-b724-1bfe041bd62b" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output text/plain
+---
+"Stream Size Exceeded"]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="675ccd4f-9216-4c1a-af61-c6c69add00d6" >
+			<ee:transform doc:name="Transform Message" doc:id="0980c48f-2cea-4687-a520-901be55b3f62">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/java
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		</on-error-propagate>
+	</error-handler>
+</mule>
